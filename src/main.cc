@@ -1,16 +1,39 @@
 #include <iostream>
 #include <string>
-
+#include "file.h"
+#include "sys.h"
+#include <map>
 
 
 using namespace std;
 
+enum cmd{
+    leave,
+    getcwd,
+    help
+};
+
+static map<string, cmd> sToCmdMap;
+
+void initialize_commands(){
+    sToCmdMap["leave"] = leave;
+    sToCmdMap["getcwd"] = getcwd;
+    sToCmdMap["help"] = help;
+}
+
 int run_command(char ** argv){
     char * cmd = argv[0];
-    if(strcmp(cmd, "exit")==0){
-        return 0;
+    switch(sToCmdMap[cmd]){
+        case leave:
+            return 0;
+        case getcwd:
+            return show_dir();
+        case help:
+            return get_help();
+        default:
+            printf("Invalid Command\n");
+            return 1;
     }
-    return 1;
 }
 
 #define BUF_SIZE 10
@@ -31,7 +54,7 @@ void run_shell(){
     int status = 0;
     printf("Welcome to the Master Shell\n");
     do{
-        printf(">");
+        printf(":) ");
         string line;
         char ** argv = (char **) malloc(BUF_SIZE * sizeof(char *));
         getline(cin, line);
@@ -40,10 +63,11 @@ void run_shell(){
         parse_line(line_char, argv);
         status = run_command(argv);
     }
-    while(status > 0);
+    while(status != 0);
 }
 
 int main(){
+    initialize_commands();
     run_shell();
     exit(0);
 }
