@@ -1,18 +1,22 @@
 CC = g++
 CFLAGS  = -Wall -Werror
 TARGET = MSH
-SRC_DIR = src/
- 
-all: clean main run
+SRC_DIR = src
+SRCS = main.cc file.cc sys.cc
+OBJS = $(SRCS:%.cc=%.o)
 
-main: main.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o
-	
-main.o:
-	$(CC) $(CFLAGS) -c $(SRC_DIR)main.cc
+all: MSH run
 
-run: 
-	./MSH
+%.o: ${SRC_DIR}/%.cc
+	@${CC} -c ${CFLAGS} $<
+
+${TARGET}: ${OBJS}
+	@${CC} -o $@ ${OBJS}
+
+ run: 
+	@./MSH
 
 clean:
-	$(RM) $(TARGET)	*.o
+	@${RM} *.o ${TARGET}
+
+

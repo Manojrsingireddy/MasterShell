@@ -3,33 +3,39 @@
 #include "file.h"
 #include "sys.h"
 #include <map>
+#include <sys/types.h>
+#include <unistd.h>
 
 
 using namespace std;
 
 enum cmd{
-    leave,
-    getcwd,
-    help
+    leave = 0,
+    getdir = 1,
+    help = 2,
+    up = 3
 };
 
 static map<string, cmd> sToCmdMap;
 
 void initialize_commands(){
     sToCmdMap["leave"] = leave;
-    sToCmdMap["getcwd"] = getcwd;
+    sToCmdMap["getdir"] = getdir;
     sToCmdMap["help"] = help;
+    sToCmdMap["up"] = up;
 }
 
 int run_command(char ** argv){
-    char * cmd = argv[0];
-    switch(sToCmdMap[cmd]){
+    char * cmd_string = argv[0];
+    switch(sToCmdMap[cmd_string]){
         case leave:
             return 0;
-        case getcwd:
+        case getdir:
             return show_dir();
         case help:
             return get_help();
+        case up:
+            return up_dir();
         default:
             printf("Invalid Command\n");
             return 1;

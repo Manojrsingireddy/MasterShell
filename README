@@ -4,4 +4,7 @@ Usage:
 Clone this git repository and use the existing executable or run "make MSH" 
 Then run "./MSH"
 
-Supported Commands:
+Supported commands:
+> leave: terminate msh
+> getcwd: print current working directory
+> help: show this help menu

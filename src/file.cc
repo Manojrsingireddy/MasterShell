@@ -22,3 +22,14 @@ int show_dir(){
         return -1;
     }
 }
+
+int up_dir(){
+    try{
+    chdir("..");
+    }
+    catch(...){
+        fprintf(stderr, "MSH: Could not move up directory\n");
+        return -1;
+    }
+    return 1;
+}
