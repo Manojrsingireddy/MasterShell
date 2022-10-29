@@ -6,5 +6,6 @@ Then run "./MSH"
 
 Supported commands:
 > leave: terminate msh
-> getcwd: print current working directory
+> getdir: print current working directory
+> up: change current directory to parent directory
 > help: show this help menu
