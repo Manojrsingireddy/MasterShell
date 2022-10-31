@@ -10,10 +10,11 @@
 using namespace std;
 
 enum cmd{
-    leave = 0,
-    getdir = 1,
-    help = 2,
-    up = 3
+    leave,
+    getdir,
+    help,
+    up,
+    boom
 };
 
 static map<string, cmd> sToCmdMap;
@@ -23,6 +24,7 @@ void initialize_commands(){
     sToCmdMap["getdir"] = getdir;
     sToCmdMap["help"] = help;
     sToCmdMap["up"] = up;
+    sToCmdMap["boom"] = boom;
 }
 
 int run_command(char ** argv){
@@ -36,6 +38,8 @@ int run_command(char ** argv){
             return get_help();
         case up:
             return up_dir();
+        case boom:
+            return clear_console();
         default:
             printf("Invalid Command\n");
             return 1;
@@ -73,6 +77,7 @@ void run_shell(){
 }
 
 int main(){
+    clear_console();
     initialize_commands();
     run_shell();
     exit(0);

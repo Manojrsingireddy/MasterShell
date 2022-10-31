@@ -5,18 +5,21 @@ SRC_DIR = src
 SRCS = main.cc file.cc sys.cc
 OBJS = $(SRCS:%.cc=%.o)
 
-all: MSH run
+all: MSH remove_build run
 
 %.o: ${SRC_DIR}/%.cc
-	@${CC} -c ${CFLAGS} $<
+	${CC} -c ${CFLAGS} $<
 
 ${TARGET}: ${OBJS}
-	@${CC} -o $@ ${OBJS}
+	${CC} -o $@ ${OBJS}
 
- run: 
-	@./MSH
+run: 
+	./MSH
 
 clean:
-	@${RM} *.o ${TARGET}
+	${RM} *.o ${TARGET}
+
+remove_build:
+	${RM} *.o
 
 

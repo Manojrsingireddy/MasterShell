@@ -8,4 +8,5 @@ Supported commands:
 > leave: terminate msh
 > getdir: print current working directory
 > up: change current directory to parent directory
+> boom: clear console
 > help: show this help menu
