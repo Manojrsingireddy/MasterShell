@@ -4,9 +4,6 @@ Usage:
 Clone this git repository and use the existing executable or run "make MSH" 
 Then run "./MSH"
 
-Supported commands:
-> leave: terminate msh
-> getdir: print current working directory
-> up: change current directory to parent directory
-> boom: clear console
-> help: show this help menu
+Supported Features:
+Whitespace based command and argument separation
+Standard command execution
